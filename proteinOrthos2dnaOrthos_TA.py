@@ -16,13 +16,13 @@ import sys
 # create an empty dictionary that will keep the file names as key and the identifiers as values
 cds_names = []
 cds_dict = {}
-# CHANGE THIS LINE
-for currentFile in os.listdir("/home/mcclintock/ta2007/myscripts/orthogroupScripts/orthogroups_files/"):
+
+for currentFile in os.listdir(sys.argv[1]):
     # print(currentFile)
     # MAKE SURE THE ORTHOGROUP FILES END WITH ".fa"
     if currentFile.endswith(".fa"):
-        # CHANGE THIS LINE
-        working_file = open("/home/mcclintock/ta2007/myscripts/orthogroupScripts/orthogroups_files/" + currentFile, "r")
+        
+        working_file = open(sys.argv[1] + currentFile, "r")
         for currentLine in working_file:
             currentLine = currentLine.rstrip()
             if currentLine.startswith(">"):
@@ -55,7 +55,7 @@ for currentFile in os.listdir("/home/mcclintock/ta2007/myscripts/orthogroupScrip
 
 # CONCATENATE ALL THE CDS FILES
 # CHANGE THIS LINE
-combined_cds_file = open("/home/mcclintock/ta2007/myscripts/orthogroupScripts/orthogroups_files/cds_files/ALLcds.fa", "r")
+combined_cds_file = open(sys.argv[2], "r")
 # print("The length of dict is: {}".format(len(cds_dict)))
 for filename, value in cds_dict.items():
     new_file = open("CDS_"+filename, "w")
