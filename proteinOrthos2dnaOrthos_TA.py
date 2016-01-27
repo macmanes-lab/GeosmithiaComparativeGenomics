@@ -12,51 +12,43 @@
 import os
 import sys
 
-# create an empty list that will contain all the identifiers from pep file headers that correspond to the cds file headers
-# create an empty dictionary that will keep the file names as key and the identifiers as values
-cds_names = []
-cds_dict = {}
 
+# create an empty dictionary that will keep the file names as key and the identifiers as values
+cds_dict = {}
+# create an empty list that will contain all the identifiers from pep file headers that correspond to the cds file headers
 for currentFile in os.listdir(sys.argv[1]):
-    # print(currentFile)
+    cds_names = []
     # MAKE SURE THE ORTHOGROUP FILES END WITH ".fa"
     if currentFile.endswith(".fa"):
-        
         working_file = open(sys.argv[1] + currentFile, "r")
         for currentLine in working_file:
             currentLine = currentLine.rstrip()
             if currentLine.startswith(">"):
                 # find pattern
                 try:
+                	# split the string that is appropriate 
                     default_name = currentLine.split('TARUNA_')[1]
                     species_name = currentLine.split('TARUNA_')[0]
                 except IndexError:
                     pass
-                # print(default_name)
                 # THESE PATTERNS MIGHT BE DIFFERENT FOR THE SPECIES YOUR ARE USING
                 cds_names.append((species_name, default_name))
                 cds_names.append((species_name, default_name.replace("P", "T")))
                 if "|" in default_name:
                     modified_cds_name = default_name.split("|")
                     cds_names.append((species_name, modified_cds_name[-1]))
-        # print(currentFile)
-        # print(cds_names)
-        # print(len(cds_names))
-        # print(set(cds_names))
-        # print(len(set(cds_names)))
         if currentFile not in cds_dict:
             key = currentFile
             cds_dict[key] = list(set(cds_names))
 
 
 # for filename, value in cds_dict.items():
-#     print("{0}\n{1}\n{2}".format(filename, value, len(id)))
+#     print("{0}\t{1}\n".format(filename, value))
 # exit()
 
 # CONCATENATE ALL THE CDS FILES
 # CHANGE THIS LINE
-combined_cds_file = open(sys.argv[2], "r")
-# print("The length of dict is: {}".format(len(cds_dict)))
+combined_cds_file = open(sys.arg[2], "r")
 for filename, value in cds_dict.items():
     new_file = open("CDS_"+filename, "w")
     flag = False
