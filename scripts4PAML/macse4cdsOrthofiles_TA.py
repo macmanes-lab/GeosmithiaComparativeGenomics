@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-# A program for aligning CDSs of a orthogroup.
-# USAGE: ./macse4cdsOrthofiles_TA.py
-# Author: Taruna Aggarwal
-# Affiliation: University of New Hampshire, Durham, NH, USA
-# Date: 01/27/2016
-# Purpose is
+"""A program for aligning CDSs of a orthogroup.
+
+USAGE: ./macse4cdsOrthofiles_TA.py
+Author: Taruna Aggarwal
+Affiliation: University of New Hampshire, Durham, NH, USA
+Date: 01/27/2016
+Purpose is
+"""
 
 import sys
 import os
