@@ -47,11 +47,13 @@ if __name__ == "__main__":
     except FileExistsError as e:
         print(e)
 
-    for currentFile in os.listdir(args.root):
-        if currentFile.endswith(".fa"):
-            runMACSE(args.root + currentFile, args.align_NT_dir \
-            + currentFile[:-3]+"_NT_aligned.fa", args.align_AA_dir \
-            + currentFile[:-3]+"_AA_aligned.fa")
+    # Create a list of files to apply the runMACSE function to
+    flist = [fname for fname in os.listdir(args.root) if fname.endswith(".fa")]
+
+
+            # runMACSE(args.root + currentFile, args.align_NT_dir \
+            # + currentFile[:-3]+"_NT_aligned.fa", args.align_AA_dir \
+            # + currentFile[:-3]+"_AA_aligned.fa")
 
     with Pool(10) as p:
         # this is where I get lost. I don't even know if this is correct.
