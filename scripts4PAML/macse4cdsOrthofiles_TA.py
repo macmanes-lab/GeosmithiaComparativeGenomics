@@ -15,10 +15,20 @@ import argparse
 from multiprocessing import pool
 
 
-def runMACSE(input_file, NT_output_file, AA_output_file):
+def runMACSE(input_file, rootdir="./", align_NT_dir="./NT",
+             align_AA_dir="./AA"):
+    fpath_full = os.path.join(rootdir, input_file)
+    runMACSE(args.root + currentFile,
+
+    NT_output_file = os.path.join(align_NT_dir,
+                                  input_file[:-3]+"_NT_aligned.fa")
+
+    AA_output_file = os.path.join(align_AA_dir,
+                                  input_file[:-3]+"_AA_aligned.fa")
+
     MACSE_command = "java -jar /fungi/taruna/shared/bin/MACSE/macse_v1.01b.jar "
     MACSE_command += "-prog alignSequences "
-    MACSE_command += "-seq {0} -out_NT {1} -out_AA {2}".format(input_file,
+    MACSE_command += "-seq {0} -out_NT {1} -out_AA {2}".format(fpath_full,
             NT_output_file, AA_output_file)
     # print(MACSE_command)
     subprocess.call(MACSE_command, shell=True)
@@ -50,10 +60,6 @@ if __name__ == "__main__":
     # Create a list of files to apply the runMACSE function to
     flist = [fname for fname in os.listdir(args.root) if fname.endswith(".fa")]
 
-
-            # runMACSE(args.root + currentFile, args.align_NT_dir \
-            # + currentFile[:-3]+"_NT_aligned.fa", args.align_AA_dir \
-            # + currentFile[:-3]+"_AA_aligned.fa")
 
     with Pool(10) as p:
         # this is where I get lost. I don't even know if this is correct.
