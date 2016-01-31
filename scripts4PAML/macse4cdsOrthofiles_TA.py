@@ -12,7 +12,7 @@ import sys
 import os
 import subprocess
 import argparse
-from multiprocessing import pool
+import multiprocessing as mp
 
 
 def runMACSE(input_file, rootdir="./", align_NT_dir="./NT",
@@ -45,6 +45,7 @@ if __name__ == "__main__":
     parser.add_argument('--align_AA_dir',
             default="/fungi/taruna/shared/testing_macse/AA_aligned/",
             help="PATH to the directory for AA aligned CDS orthogroup files.")
+    parser.add_argument("--nproc", "-n", default=2, help="Number of processors")
     args = parser.parse_args()
 
     Orig_file_dir = args.root
@@ -60,6 +61,9 @@ if __name__ == "__main__":
     # Create a list of files to apply the runMACSE function to
     flist = [fname for fname in os.listdir(args.root) if fname.endswith(".fa")]
 
-
-    with Pool(10) as p:
-        # this is where I get lost. I don't even know if this is correct.
+    # Create a pool
+    pool = mp.Pool(processes=args.nproc)
+    for f in flist:
+        pool.apply_async(runMACSE, args=(f, args.root, NT_align_file_dir,
+                                         AA_align_file_dir))
+    pool.close()
