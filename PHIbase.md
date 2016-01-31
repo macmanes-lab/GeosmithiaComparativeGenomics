@@ -9,17 +9,18 @@
 ```
 blastp -num_threads 32 -max_target_seqs 1 -evalue 0.000001 -db phibase4.0_database \
 -query g.morbida.proteins.fasta \
--out g.morbida.phibase.e1E-6 -outfmt 6
+-out gm5.phibase.e1E-6 -outfmt 6
 ```
 #### Run blastp for *G. flava*
 ```
 blastp -num_threads 32 -max_target_seqs 1 -evalue 0.000001 -db phibase4.0_database \
--query Fusarium_solani.v2.0.29.pep.all.fa \
--out g.flava.phibase.e1E-6 -outfmt 6
+-query gfl1_proteins_final.fasta \
+-out gfl1.phibase4.e1E-6 -outfmt 6
 ```
 #### Run blastp for *G. putterillii*
 ```
 blastp -num_threads 32 -max_target_seqs 1 -evalue 0.000001 -db phibase4.0_database \
--query Grosmannia_clavigera_kw1407.GCA_000143105.2.29.pep.all.fa \
--out g.putterillii.phibase.e1E-6 -outfmt 6
+-query gp2_proteins_final.fasta \
+-out gp4.phibase4.e1E-6 -outfmt 6
 ```
+
