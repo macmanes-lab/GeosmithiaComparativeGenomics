@@ -15,4 +15,4 @@ cml.read_ctl_file("codeml.ctl")
 cml.alignment = sys.argv[1]
 cml.tree = sys.argv[2]
 cml.out_file = sys.argv[3]
-cml.run()
+cml.run(verbose = True)
