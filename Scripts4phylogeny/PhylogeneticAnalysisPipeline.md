@@ -8,7 +8,6 @@ Step 2: Parse single-copy orthogroups (`Parsing_orthogroups_TA.py`).
 
 Step 3: Trim sites in each orthogroup using `-gappyout` option in trimAl (trimAl v1.4.rev15).
 
-```
 
 Step 4: Rename all the headers in each orthogroups so they are uniform across all files. 
 
