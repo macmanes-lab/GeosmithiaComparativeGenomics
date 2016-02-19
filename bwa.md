@@ -3,7 +3,10 @@
 ### A. Index the *G. putterillii* genome assembly
 
 ```
-bwa index gp2-K55P4K91-scaffolds.fa
+bwa index gp2-K55P4K91-scaffolds.fa 
+
+TEST
+
 ```
 
 ### B. Map paired-end reads to the indexed genome
