@@ -2,6 +2,7 @@
 # A program for finding fasta files that contain single-copy orthologs from at least 85% of the species in question
 # USAGE: ./Parsing_orthogroups_TA.py
 # Author: Taruna Aggarwal
+# Email: ta2007@wildcats.unh.edu
 # Affiliation: University of New Hampshire, Durham, NH, USA
 # Date: 11/22/2015
 # Purpose is parse through fasta files to find 85% or more completed orthogroups
