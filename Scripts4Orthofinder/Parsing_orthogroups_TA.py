@@ -12,6 +12,7 @@ import sys
 
 good_files = []
 
+# CREATE YOUR OWN SPECIES LOOKUP LIST USING THE FILE NAMES OR THE SpeciesIDs.txt by Orthofinder
 lookup_species = ['Acre_chry',  'Ceph_frag',  'Fusa_gram',  'Neur_cras',  'Stan_gris',
 'Agar_hyph',  'Cera_plat',  'Fusa_sola',  'Pucc_gram',  'Tala_acul',
 'Alte_bras',  'Chae_glob',  'geos_flav',  'Pyro_conf',  'Tric_rees',
@@ -20,11 +21,13 @@ lookup_species = ['Acre_chry',  'Ceph_frag',  'Fusa_gram',  'Neur_cras',  'Stan_
 'Cucu_berb',  'Gros_clav',  'Rhiz_eric',  'Usti_vire', 'Byss_circ',  
 'Eutl_lata',  'Myro_inun',  'Sacc_cere',  'Zymo_trit']
 
+# CHANGE THIS PATH TO YOUR ALIGNMENTS PATH
 for root, dirs, files in os.walk("/fungi/taruna/shared/genomes4orthofinder4PAML/expanded_pep/Results_Feb11/Alignments/"):
     # orig_file_num = len(files)
     for currentFile in files:
         keep_file = True # assume file is good at the start
         species_list = []
+# CHANGE THIS PATH TO YOUR ALIGNMENTS PATH
         working_file = open("/fungi/taruna/shared/genomes4orthofinder4PAML/expanded_pep/Results_Feb11/Alignments/" + currentFile, "r")
         for currentLine in working_file:
             currentLine = currentLine.rstrip()
@@ -35,12 +38,15 @@ for root, dirs, files in os.walk("/fungi/taruna/shared/genomes4orthofinder4PAML/
                             keep_file = False # the file bad
                         else:
                             species_list.append(species)
+# CHANGE TO YOUR DESIRED THRESHOLD 
         if len(species_list) < 34:
             keep_file = False # the file bad
         if keep_file:
             good_files.append(currentFile)
 
+# CHANGE THIS PATH TO YOUR OUTPUT DIRECTORY PATH. DO NOT MAKE THE OUTPUT DIR IN THE "Alignments" DIR
 Good_file_dir = "/fungi/taruna/shared/genomes4orthofinder4PAML/expanded_pep/Results_Feb11/parsed_orthogroups_len16/"
+# CHANGE THIS PATH TO YOUR ALIGNMENTS PATH
 Orig_file_dir = "/fungi/taruna/shared/genomes4orthofinder4PAML/expanded_pep/Results_Feb11/Alignments/"
 
 try:
