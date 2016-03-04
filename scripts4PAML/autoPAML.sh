@@ -3,12 +3,11 @@
 usage=$(cat << EOF
    # This script runs a pipeline that takes a fasta file and BAMfiles and tests for selection:
    #
-   autopaml.sh [options]
+   autoPAML.sh [options]
    Options:
       -t <v> : *required* Numberof threads to use.
 EOF
 );
-
 
 while getopts f:b:o:t: option
 do
@@ -18,21 +17,22 @@ do
         esac
 done
 
-
-
 ##Align
 END=$(ls | wc -l | awk '{print $1}')
 START=1
 
-
-for inputaln in $(ls *aln); do
-    F=`basename $inputaln .aln`;
-    if [ $(ps -U ta2007 | grep 'codeml\|raxmlHPC-PTHREADS' | wc -l | awk '{print $1}') -lt $TC ] ;
+for inputaln in $(ls *_NT_aligned.fa); do
+    F=`basename $inputaln .fa`;
+    if [ $(ps -all | grep 'codeml\|raxmlHPC' | wc -l | awk '{print $1}') -lt $TC ] ;
     then
         echo 'I have a core to use'
-        #java -Xmx2000m -jar ~/bin/MACSE/macse_v1.01b.jar -prog alignSequences -seq $inputaln -out_NT $F.aln &&
-        raxmlHPC-PTHREADS-AVX -T 1 -m GTRGAMMA -n $F.tree -s $F.aln -p 12345 &&
-        python paml.py $F.aln RAxML_bestTree.$F.tree $F.out &
+        ./adding_hashtag_TA.py $F.fasta
+        perl pal2nal.pl $F'_AA_aligned.fa' $F'_NT_aligned.fa' -output fasta -nogap -nomismatch > $F.clean &&
+        raxmlHPC-PTHREADS -f a -m GTRGAMMA -p 83845 -T 1 -x 93458 -N 100 -n $F.tree -s $F.clean &&
+        Insert text change python script
+        python null_autoPAML.py $F.clean RAxML_bestTree.$F.tree $F.null.out &&
+        python alt_autoPAML.py $F.clean RAxML_bestTree.$F.tree $F.alt.out &&
+        python autoPAMLresults.py $F.out | tee -a paml.results &
     else
         echo 'Dont wake me up until there is something else to do'
         sleep 25s
