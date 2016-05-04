@@ -20,7 +20,7 @@ def runRAxML(input_file, name):
     subprocess.call(raxmlHPC_command, shell=True)
 
 for currentFile in os.listdir(args.root):
-    if currentFile.endswith(".clean"):
-        runRAxML(args.root + currentFile, currentFile[:-6])
+    if currentFile.endswith(".fasta"):
+        runRAxML(args.root + currentFile, currentFile[:-20])
 
 

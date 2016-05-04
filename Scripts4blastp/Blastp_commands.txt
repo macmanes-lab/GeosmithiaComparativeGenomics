@@ -1,0 +1,26 @@
+blastp -num_threads 12 -max_target_seqs 1 -db nr -query ../genomes4orthofinder4PAML/shortlist_pep/geos_morb_sig_seqs.pep -out gm5.paml42.func -outfmt "6 qseqid qlen sseqid sgi slen qstart qend sstart send evalue bitscore length pident mismatch gaps stitle" -negative_gilist sequence.gi.txt
+
+qseqid		Query Seq-id
+qlen 		Query sequence length
+sseqid 		Subject Seq-id
+sgi 		Subject GI
+slen 		Subject sequence length
+qstart 		Start of alignment in query
+qend 		End of alignment in query
+sstart 		Start of alignment in subject
+send 		End of alignment in subject
+evalue 		E-value 		
+bitscore 	bitscore
+length 		Alignment length
+pident 		Percentage of identical length 
+mismatch 	Number of mismatches 
+gaps 		Number of gaps
+stitle		Subject Title
+
+blastp -num_threads 12 -max_target_seqs 20 -db nr -query gm32.fa -out gm32.nr -outfmt "6 qseqid qlen sseqid sgi slen qstart qend sstart send evalue bitscore length pident mismatch gaps stitle" -negative_gilist sequence.gi.txt
+
+blastp -num_threads 12 -max_target_seqs 20 -db nr -query gm859.fa -out gm859.nr -outfmt "6 qseqid qlen sseqid sgi slen qstart qend sstart send evalue bitscore length pident mismatch gaps stitle" -negative_gilist sequence.gi.txt
+
+blastp -num_threads 12 -max_target_seqs 20 -db nr -query gm5704.fa -out gm5704.nr -outfmt "6 qseqid qlen sseqid sgi slen qstart qend sstart send evalue bitscore length pident mismatch gaps stitle" -negative_gilist sequence.gi.txt
+
+blastp -num_threads 12 -max_target_seqs 100 -db nr -query gm5740.fa -out gm5740.nr -outfmt "6 qseqid qlen sseqid sgi slen qstart qend sstart send evalue bitscore length pident mismatch gaps stitle" -negative_gilist sequence.gi.txt

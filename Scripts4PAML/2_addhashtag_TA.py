@@ -26,8 +26,8 @@ for file in os.listdir(args.input):
             currentLine = currentLine.rstrip()
             if currentLine.startswith(">geos_morb"):
                 new_file.write("{0}{1}\n".format(currentLine, "#1"))
-            #elif currentLine[0]==">":
-            #    new_file.write("{0}\n".format(currentLine[0:10]))
+            elif currentLine.startswith(">Gros_clav"):
+                new_file.write("{0}{1}\n".format(currentLine, "#2"))
             else:
                 new_file.write("{0}\n".format(currentLine))
 working_file.close()
